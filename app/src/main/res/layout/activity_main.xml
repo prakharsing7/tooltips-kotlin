@@ -20,7 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/target_element"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@+id/til_element"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/til_element" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_element"
@@ -32,6 +41,13 @@
                 app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:text="@string/select_element" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -213,6 +229,24 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_arrow_width"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="15dp"
+                android:hint="@string/arrow_width"
+                app:boxBackgroundColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_corner_radius"
+                app:suffixText="pixels">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_arrow_height"

@@ -16,4 +16,20 @@
     <string name="incomplete_form_message">Please fill in all the required fields correctly. If you\'re unsure, you can click the \'Fill Default Values\' button to populate the fields with default values.</string>
     <string name="background_colour_dialog_title">Select background colour</string>
     <string name="text_colour_dialog_title">Select text colour</string>
+    <string name="arrow_height">Arrow Height</string>
+    <string name="arrow_width">Arrow Width</string>
+    <string name="tooltip_width">Tooltip Width</string>
+    <string name="select_element">Select Element</string>
+    <string name="target_element">Target Element</string>
+    <string name="tooltip_text_goes_here">Tooltip text goes here.</string>
+    <string name="button_1">Button 1</string>
+    <string name="button_2">Button 2</string>
+    <string name="button_4">Button 4</string>
+    <string name="button_3">Button 3</string>
+    <string name="button_5">Button 5</string>
+    <string name="bottom">BOTTOM</string>
+    <string name="top">TOP</string>
+    <string name="left">LEFT</string>
+    <string name="right">RIGHT</string>
+
 </resources>

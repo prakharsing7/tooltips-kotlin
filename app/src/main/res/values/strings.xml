@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">kotlinAppFirst</string>
+    <string name="app_name">Kotlin App First</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="render_tooltip">Render Tooltip</string>
+    <string name="fill_default_values">Fill Default Values</string>
+    <string name="corner_radius">Corner Radius</string>
+    <string name="background_colour">Background Colour</string>
+    <string name="text_colour">Text Colour</string>
+    <string name="padding">Padding</string>
+    <string name="text_size">Text Size</string>
+    <string name="tooltip_text">Tooltip text</string>
+    <string name="select_position">Select Position</string>
+    <string name="tooltip_position">Tooltip Position</string>
+    <string name="incomplete_form">Incomplete Form</string>
+    <string name="incomplete_form_message">Please fill in all the required fields correctly. If you\'re unsure, you can click the \'Fill Default Values\' button to populate the fields with default values.</string>
+    <string name="background_colour_dialog_title">Select background colour</string>
+    <string name="text_colour_dialog_title">Select text colour</string>
 </resources>

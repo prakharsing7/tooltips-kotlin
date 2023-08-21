@@ -1,43 +1,36 @@
 package com.example.kotlinappfirst
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.kotlinappfirst.ui.theme.KotlinAppFirstTheme
+import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlinappfirst.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            KotlinAppFirstTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    Greeting("Android")
-                }
-            }
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var itemsElement: List<String>
+    private lateinit var itemsPosition: List<String>
+
+
+    private fun validateForm(): Boolean {
+        val element = binding.tilElement.editText?.text.toString()
+        val position = binding.tilPosition.editText?.text.toString()
+        val tooltipText = binding.tilTooltipText.editText?.text.toString()
+        val textSize = binding.tilTextSize.editText?.text.toString()
+        val padding = binding.tilPadding.editText?.text.toString()
+        val cornerRadius = binding.tilCornerRadius.editText?.text.toString()
+        val tooltipWidth = binding.tilTooltipWidth.editText?.text.toString()
+        val arrowHeight = binding.tilArrowHeight.editText?.text.toString()
+        val arrowWidth = binding.tilArrowWidth.editText?.text.toString()
+        val backgroundColor = binding.btnBackgroundColor.text
+        val textColor = binding.btnTextColor.text
+
+        if (element !in itemsElement || position !in itemsPosition || tooltipText.isBlank() ||
+            textSize.isBlank() || padding.isBlank() || cornerRadius.isBlank() ||
+            tooltipWidth.isBlank() || arrowHeight.isBlank() || arrowWidth.isBlank() ||
+            !backgroundColor.startsWith('#') || !textColor.startsWith('#')
+        ) {
+            return false
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KotlinAppFirstTheme {
-        Greeting("Android")
+        return true
     }
 }

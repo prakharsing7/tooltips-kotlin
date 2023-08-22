@@ -32,7 +32,7 @@ Why limit to text? With this app, you can embed images within tooltips, further 
 ### Installation 
 1. Clone this repository:
    ```
-   git clone https://github.com/your_username/kotlin-dynamic-tooltip-app.git
+   https://github.com/prakharsing7/tooltips-kotlin.git
    ```
 2. Open the project in Android Studio or IntelliJ IDEA.
 3. Run the app on an emulator or a real device.

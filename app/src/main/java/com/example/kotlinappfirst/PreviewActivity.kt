@@ -3,6 +3,7 @@ package com.example.kotlinappfirst
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
@@ -37,6 +38,10 @@ class PreviewActivity : AppCompatActivity() {
     private var arrowWidth: Int? = null
     private var backgroundColor: String? = null
     private var textColor: String? = null
+    private var imageUri: String? = null
+    private var imageHeight: Int? = null
+    private var imageWidth: Int? = null
+    private var imageRadius: Float? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +69,10 @@ class PreviewActivity : AppCompatActivity() {
         arrowWidth = intent.getStringExtra("arrow_width")?.toInt()
         backgroundColor = intent.getStringExtra("background_color")
         textColor = intent.getStringExtra("text_color")
+        imageUri = intent.getStringExtra("image_uri")
+        imageHeight = intent.getStringExtra("image_height")?.toIntOrNull() ?: 250
+        imageWidth = intent.getStringExtra("image_width")?.toIntOrNull() ?: 250
+        imageRadius = intent.getStringExtra("image_radius")?.toFloatOrNull() ?: 2f
     }
 
     private fun getElement(): MaterialButton {
@@ -223,6 +232,22 @@ class PreviewActivity : AppCompatActivity() {
             }
 
             else -> Unit
+        }
+
+        try {
+            if (imageUri.isNullOrEmpty() || imageUri == "null") {
+                tooltipBinding.cvTooltipImage.visibility = GONE
+                return
+            }
+            val uri = Uri.parse(imageUri)
+
+            tooltipBinding.ivTooltipImage.setImageURI(uri)
+            tooltipBinding.ivTooltipImage.layoutParams.height = imageHeight!!
+            tooltipBinding.ivTooltipImage.layoutParams.width = imageWidth!!
+            tooltipBinding.cvTooltipImage.radius = imageRadius!!
+            tooltipBinding.cvTooltipImage.visibility = VISIBLE
+        } catch (e: Exception) {
+            tooltipBinding.cvTooltipImage.visibility = GONE
         }
     }
 

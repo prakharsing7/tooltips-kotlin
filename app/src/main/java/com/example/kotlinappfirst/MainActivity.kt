@@ -1,22 +1,27 @@
 package com.example.kotlinappfirst
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.kotlinappfirst.databinding.ActivityMainBinding
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.skydoves.colorpickerview.ColorPickerDialog
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
+import com.example.kotlinappfirst.databinding.ActivityMainBinding
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var itemsElement: List<String>
     private lateinit var itemsPosition: List<String>
+    private var selectedImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -92,6 +97,27 @@ class MainActivity : AppCompatActivity() {
         binding.btnFillDefault.setOnClickListener {
             fillDefault()
         }
+
+        binding.btnAddImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            intent.type = "image/*"
+            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        }
+
+        binding.btnClearImage.setOnClickListener {
+            clearImageFields()
+        }
+    }
+
+    private fun clearImageFields() {
+        selectedImageUri = null
+        binding.btnAddImage.text = resources.getString(R.string.click_to_add_image)
+        binding.tilImageHeight.editText?.text = null
+        binding.tilImageHeight.editText?.clearFocus()
+        binding.tilImageWidth.editText?.text = null
+        binding.tilImageWidth.editText?.clearFocus()
+        binding.tilImageRadius.editText?.text = null
+        binding.tilImageRadius.editText?.clearFocus()
     }
 
     private fun nextActivity() {
@@ -108,6 +134,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("arrow_width", binding.tilArrowWidth.editText?.text.toString())
             intent.putExtra("background_color", binding.btnBackgroundColor.text)
             intent.putExtra("text_color", binding.btnTextColor.text)
+            intent.putExtra("image_uri", selectedImageUri.toString())
+            intent.putExtra("image_height", binding.tilImageHeight.editText?.text.toString())
+            intent.putExtra("image_width", binding.tilImageWidth.editText?.text.toString())
+            intent.putExtra("image_radius", binding.tilImageRadius.editText?.text.toString())
+
             startActivity(intent)
         } else {
             val alertDialogBuilder = AlertDialog.Builder(this)
@@ -118,6 +149,18 @@ class MainActivity : AppCompatActivity() {
             }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            selectedImageUri = data.data
+            val file = selectedImageUri?.path?.let { File(it) }
+            binding.btnAddImage.text = file?.name.toString()
+            binding.tilImageHeight.editText?.setText("250")
+            binding.tilImageWidth.editText?.setText("250")
+            binding.tilImageRadius.editText?.setText("10")
         }
     }
 
@@ -170,4 +213,9 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
+
+    companion object {
+        const val PICK_IMAGE_REQUEST = 1
+    }
+
 }
